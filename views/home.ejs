@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>TO-DO List</title>
+        <script src="https://use.fontawesome.com/b0db3aa219.js"></script>
+        <link rel="stylesheet" href="/css/home.css">
+        <script src="/js/home.js" defer></script>
+    </head>
+    <body>
+        <form action="/submit-task" method="post">
+            <input type="text" placeholder="enter title" name="title" required>
+            <input type="text" placeholder="description" name="description" required>
+            <select name="category">
+                <option value="Work">Work</option>
+                <option value="Daily">Daily</option>
+                <option value="Home">Home</option>
+                <option value="Other">Other</option>
+            </select>
+            <input type="submit">
+        </form>
+        <ul id="task-list">
+            <% for(let i of locals.task){ %>
+                <li>
+                    <div>
+                        <div class="flex" style="justify-content: space-around;align-items: baseline;">
+                            <p class="bold-text wid90"> <%= i.title %> </p>
+                            <a href="/delete-contact/<%=i._id%>"> <i class="fa fa-address-book" aria-hidden="true"></i> </a>
+                        </div>
+                        <div class="flex">
+                            <p class="wid90">detail: <%= i.description %> </p>
+                            <p><i> Category: <%= i.category %> </i></p>
+                        </div>
+                        
+                    </div>
+                    <div class="alter">
+                        <p>mark as completed</p>
+                    </div>
+                    
+                </li>
+            <% }%>
+        </ul>
+    </body>
+</html>

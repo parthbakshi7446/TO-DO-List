@@ -1,0 +1,49 @@
+.flex{
+    display: flex;
+}
+
+body{
+    width:40%;
+    min-width:350px;
+    border:1px solid black;
+    margin: auto;
+    height: auto;
+    min-height: 500px;
+}
+.wid90{
+    width:90%;
+}
+#task-list li{
+    border:1px solid black;
+    margin:5px;
+    transition: 0.4s;
+    position: relative;
+    height:auto;
+    width: auto;
+    padding: 10px;
+}
+.bold-text{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+#task-list li:hover{
+    background-color: lightgray;
+}
+#task-list li:hover .alter p{
+    display:block;
+}
+.alter{
+    position: absolute;
+    top:0px;
+    /* left:40%; */
+    /* opacity:0.2; */
+    /* background-color: aqua; */
+    height: 90%;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.alter p{
+    display:none;
+}
