@@ -6,37 +6,56 @@
         <script src="/js/home.js" defer></script>
     </head>
     <body>
+        <h1 style="height:5%">TO-DO List</h1>
         <form action="/submit-task" method="post">
-            <input type="text" placeholder="enter title" name="title" required>
-            <input type="text" placeholder="description" name="description" required>
-            <select name="category">
-                <option value="Work">Work</option>
-                <option value="Daily">Daily</option>
-                <option value="Home">Home</option>
-                <option value="Other">Other</option>
-            </select>
-            <input type="submit">
+            <div>
+                <input class="input" type="text" placeholder="enter title" name="title" required>
+                <input class="input" type="text" placeholder="description" name="description" required>
+            </div>
+            <div>
+                
+                <select class="input" name="category">
+                    <option value="Work">Work</option>
+                    <option value="Urgent">Urgent</option>
+                    <option value="Home">Home</option>
+                    <option value="Other">Other</option>
+                </select>
+                <input class="input" type="submit" value="ADD TASK">
+            </div>
+            
         </form>
+        <div class="flex" style="height:5%;justify-content: space-around;">
+            <a href="/mark-all-done"><em> Mark All Complete </em></a>
+            <a href="/delete-all"><em> Delete All </em></a>
+            <a href="/all-done"><em> Delete Selected </em></a>
+            <span><em> Tasks Left: </em></span>
+        </div>
         <ul id="task-list">
             <% for(let i of locals.task){ %>
-                <li>
-                    <div>
-                        <div class="flex" style="justify-content: space-around;align-items: baseline;">
-                            <p class="bold-text wid90"> <%= i.title %> </p>
-                            <a href="/delete-contact/<%=i._id%>"> <i class="fa fa-address-book" aria-hidden="true"></i> </a>
-                        </div>
-                        <div class="flex">
-                            <p class="wid90">detail: <%= i.description %> </p>
-                            <p><i> Category: <%= i.category %> </i></p>
-                        </div>
-                        
+                <li id="<%= i._id %>" mark="<%=i.checked%>">
+                    <div class="flex" style="justify-content: space-around;align-items: baseline;">
+                        <span class="bold-text wid90"> <%= i.title %> </span>
+                        <a href="/delete-contact/<%=i._id%>"> <i class="fa fa-times red fa-lg" aria-hidden="true"></i> </a>
                     </div>
-                    <div class="alter">
-                        <p>mark as completed</p>
+                    <div class="flex">
+                        <span class="wid70">detail: <%= i.description %> </span>
+                        <span id="category" cat="<%= i.category %>"><i> Category: <%= i.category %> </i></span>
                     </div>
-                    
                 </li>
             <% }%>
         </ul>
+        <div id="filters">
+            <div class="wid50">
+                <span><b>Filters:&nbsp</b></span>
+                <a href="/data" id="all"><em> &nbspAll&nbsp </em></a>
+                <a href="/data/complete" id="comp"><em> &nbspCompleted&nbsp </em></a>
+                <a href="/data/incomplete" id="incomp"><em> &nbspIncomplete&nbsp </em></a>
+            </div>
+            <div style="text-align: right;" class="wid50">
+                <span class="bold-text"><i>Note:- Click Task to Mark it as Completed</i></span>
+            </div>
+            
+        </div>
+        
     </body>
 </html>

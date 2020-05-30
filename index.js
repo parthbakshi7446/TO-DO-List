@@ -47,6 +47,95 @@ app.post('/submit-task',function(req,res,next){
     res.redirect('back');
 });
 
+app.get('/data',function(req,res,next){
+    Task.find({},function(err,data){
+        if(err){
+            console.log("error in return all data");
+            return;
+        }
+        // res.send(data);
+        res.render('home',{task:data});
+    });
+    
+});
+app.get('/data/complete',function(req,res,next){
+    Task.find({checked:true},function(err,data){
+        if(err){
+            console.log("error in return all data");
+            return;
+        }
+        // res.send(data);
+        res.render('home',{task:data});
+    });
+    
+});
+
+app.get('/data/incomplete',function(req,res,next){
+    Task.find({checked:false},function(err,data){
+        if(err){
+            console.log("error in return all data");
+            return;
+        }
+        // res.send(data);
+        res.render('home',{task:data});
+    });
+    
+});
+
+app.get('/all-done',function(req,res,next){
+    // Task.find()
+    Task.deleteMany({checked:true},function(err){
+        if(err){
+            console.log(err);
+            
+        }
+        res.redirect('back');
+    });
+});
+
+app.get('/mark-all-done',function(req,res,next){
+    Task.updateMany({checked:false},{checked:true},function(err,data){
+        if(err){
+            console.log(err);
+        }
+        res.redirect('back');
+    });
+});
+
+app.get('/delete-all',function(req,res,next){
+    Task.deleteMany({},function(err){
+        if(err){
+            console.log(err);
+        }
+        res.redirect('back');
+    });
+});
+
+app.post('/mark-check/',function(req,res,next){
+    Task.findById(req.query.id,function(err,data){
+        if(err){
+            console.log("data main ni h check");
+            return;
+        }
+        if(data.checked){
+            Task.findByIdAndUpdate(req.query.id,{checked:false},function(err,data){
+                if(err){
+                    console.log("issue");
+                }
+            });
+            res.send(true); //sending previous value
+        }else{
+            Task.findByIdAndUpdate(req.query.id,{checked:true},function(err,data){
+                if(err){
+                    console.log("issue");
+                } 
+            });
+            res.send(false); //sending previous value
+        }
+        
+    });
+});
+
 app.get('/delete-contact/:id',function(req,res,next){
     console.log(req.params);
     Task.findByIdAndDelete(req.params.id,function(err){
