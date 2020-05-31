@@ -6,56 +6,61 @@
         <script src="/js/home.js" defer></script>
     </head>
     <body>
-        <h1 style="height:5%">TO-DO List</h1>
-        <form action="/submit-task" method="post">
-            <div>
-                <input class="input" type="text" placeholder="enter title" name="title" required>
-                <input class="input" type="text" placeholder="description" name="description" required>
-            </div>
-            <div>
+        <div id="box">
+            <h1 style="height:5%">TO-DO List</h1>
+            <form action="/submit-task" method="post">
+                <div>
+                    <input class="input" type="text" placeholder="enter title" name="title" required>
+                    <input class="input" type="text" placeholder="description" name="description" required>
+                </div>
+                <div>
+                    
+                    <select class="input wid30" name="category">
+                        <option value="Work">Work</option>
+                        <option value="Urgent">Urgent</option>
+                        <option value="Home">Home</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <input type="date" name="date" class="input wid30" >
+                    <input class="input wid20" type="submit" value="ADD TASK">
+                </div>
                 
-                <select class="input" name="category">
-                    <option value="Work">Work</option>
-                    <option value="Urgent">Urgent</option>
-                    <option value="Home">Home</option>
-                    <option value="Other">Other</option>
-                </select>
-                <input class="input" type="submit" value="ADD TASK">
+            </form>
+            <div class="flex info" style="height:5%;justify-content: space-around;">
+                <a href="/mark-all-done"><em class="hover"> Mark All Complete </em></a>
+                <a href="/delete-all"><em class="hover"> Delete All </em></a>
+                <a href="/all-done"><em class="hover"> Delete Selected </em></a>
+                <span><em> Tasks Left:<span><%=count%></span> </em></span>
             </div>
-            
-        </form>
-        <div class="flex" style="height:5%;justify-content: space-around;">
-            <a href="/mark-all-done"><em> Mark All Complete </em></a>
-            <a href="/delete-all"><em> Delete All </em></a>
-            <a href="/all-done"><em> Delete Selected </em></a>
-            <span><em> Tasks Left: </em></span>
+            <ul id="task-list">
+                <% for(let i of locals.task){ %>
+                    <li id="<%= i._id %>" mark="<%=i.checked%>">
+                        <div class="flex" style="justify-content: space-around;align-items: baseline;">
+                            <span class="bold-text wid90"> <%= i.title %> </span>
+                            <a href="/delete-contact/<%=i._id%>"> <i class="fa fa-times red fa-lg" aria-hidden="true"></i> </a>
+                        </div>
+                        <div class="flex">
+                            <span class="wid50">detail: <%= i.description %> </span>
+                            <span class="wid30"><i class="fa fa-calendar" aria-hidden="true"></i> <span style="font-size: 0.8rem;"> <%=i.date%> </span></span>
+                            <span id="category" cat="<%= i.category %>" style="margin-left: 40px;padding:3px"><i>  <%= i.category %> </i></span>
+                        </div>
+                    </li>
+                <% }%>
+            </ul>
+            <div id="filters">
+                <div class="wid50">
+                    <span><b style="font-size: 0.8rem;">Filters:&nbsp</b></span>
+                    <a href="/data" id="all"><em class="hover"> &nbspAll&nbsp </em></a>
+                    <a href="/data/complete" id="comp"><em class="hover"> &nbspCompleted&nbsp </em></a>
+                    <a href="/data/incomplete" id="incomp"><em class="hover"> &nbspIncomplete&nbsp </em></a>
+                </div>
+                <div style="text-align: right;" class="wid50">
+                    <span class="bold-text"><i>Note:- Click Task to Mark it as Completed</i></span>
+                </div>
+                
+            </div>
         </div>
-        <ul id="task-list">
-            <% for(let i of locals.task){ %>
-                <li id="<%= i._id %>" mark="<%=i.checked%>">
-                    <div class="flex" style="justify-content: space-around;align-items: baseline;">
-                        <span class="bold-text wid90"> <%= i.title %> </span>
-                        <a href="/delete-contact/<%=i._id%>"> <i class="fa fa-times red fa-lg" aria-hidden="true"></i> </a>
-                    </div>
-                    <div class="flex">
-                        <span class="wid70">detail: <%= i.description %> </span>
-                        <span id="category" cat="<%= i.category %>"><i> Category: <%= i.category %> </i></span>
-                    </div>
-                </li>
-            <% }%>
-        </ul>
-        <div id="filters">
-            <div class="wid50">
-                <span><b>Filters:&nbsp</b></span>
-                <a href="/data" id="all"><em> &nbspAll&nbsp </em></a>
-                <a href="/data/complete" id="comp"><em> &nbspCompleted&nbsp </em></a>
-                <a href="/data/incomplete" id="incomp"><em> &nbspIncomplete&nbsp </em></a>
-            </div>
-            <div style="text-align: right;" class="wid50">
-                <span class="bold-text"><i>Note:- Click Task to Mark it as Completed</i></span>
-            </div>
-            
-        </div>
+        
         
     </body>
 </html>

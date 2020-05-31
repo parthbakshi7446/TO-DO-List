@@ -19,9 +19,11 @@ let todoschema = new mongoose.Schema({
     checked:{
         type:Boolean,
         required:true
+    },
+    date:{
+        type:String
     }
 });
 
-let Task = mongoose.model('Task',todoschema);
 
-module.exports = Task;
+module.exports.Task = mongoose.model('Task',todoschema);

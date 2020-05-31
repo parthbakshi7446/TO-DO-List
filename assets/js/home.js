@@ -13,10 +13,17 @@ completeTask.addEventListener('click',function(obj){
     
     xhr.onload = function(){
         if(xhr.response=='true'){
-            targetElem.style.backgroundColor="white";
+            targetElem.style.backgroundColor="transparent";
+            targetElem.style.opacity="1";
+            let a = document.querySelector('.info span em span').innerHTML;
+            document.querySelector('.info span em span').innerHTML = Number(a) + 1;
         }
         else{
             targetElem.style.backgroundColor="lightgray";
+            targetElem.style.opacity="0.2";
+
+            let a = document.querySelector('.info span em span').innerHTML;
+            document.querySelector('.info span em span').innerHTML = Number(a)-1;
         }
     };
 
