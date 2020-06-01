@@ -1,0 +1,1 @@
+module.exports.totalCount = 0;

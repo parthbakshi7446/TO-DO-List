@@ -8,7 +8,7 @@
     <body>
         <div id="box">
             <h1 style="height:5%">TO-DO List</h1>
-            <form action="/submit-task" method="post">
+            <form action="/act/submit-task" method="post">
                 <div>
                     <input class="input" type="text" placeholder="enter title" name="title" required>
                     <input class="input" type="text" placeholder="description" name="description" required>
@@ -27,9 +27,9 @@
                 
             </form>
             <div class="flex info" style="height:5%;justify-content: space-around;">
-                <a href="/mark-all-done"><em class="hover"> Mark All Complete </em></a>
-                <a href="/delete-all"><em class="hover"> Delete All </em></a>
-                <a href="/all-done"><em class="hover"> Delete Selected </em></a>
+                <a href="/act/mark-all-done"><em class="hover"> Mark All Complete </em></a>
+                <a href="/act/delete-all"><em class="hover"> Delete All </em></a>
+                <a href="/act/all-done"><em class="hover"> Delete Selected </em></a>
                 <span><em> Tasks Left:<span><%=count%></span> </em></span>
             </div>
             <ul id="task-list">
@@ -37,11 +37,18 @@
                     <li id="<%= i._id %>" mark="<%=i.checked%>">
                         <div class="flex" style="justify-content: space-around;align-items: baseline;">
                             <span class="bold-text wid90"> <%= i.title %> </span>
-                            <a href="/delete-contact/<%=i._id%>"> <i class="fa fa-times red fa-lg" aria-hidden="true"></i> </a>
+                            <a href="/act/delete-task/<%=i._id%>"> <i class="fa fa-times red fa-lg" aria-hidden="true"></i> </a>
                         </div>
                         <div class="flex">
                             <span class="wid50">detail: <%= i.description %> </span>
-                            <span class="wid30"><i class="fa fa-calendar" aria-hidden="true"></i> <span style="font-size: 0.8rem;"> <%=i.date%> </span></span>
+                            <span class="wid30"><i class="fa fa-calendar" aria-hidden="true"></i> <span style="font-size: 0.8rem;">
+                                <% if(i.date){ %>
+                                    <%=i.date%>
+                                <%} else{ %>
+                                    No Deadline
+                                <%} %>
+                                
+                            </span></span>
                             <span id="category" cat="<%= i.category %>" style="margin-left: 40px;padding:3px"><i>  <%= i.category %> </i></span>
                         </div>
                     </li>
@@ -55,7 +62,7 @@
                     <a href="/data/incomplete" id="incomp"><em class="hover"> &nbspIncomplete&nbsp </em></a>
                 </div>
                 <div style="text-align: right;" class="wid50">
-                    <span class="bold-text"><i>Note:- Click Task to Mark it as Completed</i></span>
+                    <span class="bold-text"><i>Note:- Click Task to Mark it as Complete/Incomplete</i></span>
                 </div>
                 
             </div>

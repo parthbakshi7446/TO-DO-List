@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 //create connection between server and database
 const buildconnection = require('../config/mongoose');
 
-//create schema
+//create schema for Task collection
 let todoschema = new mongoose.Schema({
     title:{
         type:String,

@@ -13,7 +13,7 @@ function clickTask(obj){
     }
     
     let xhr = new XMLHttpRequest();
-    xhr.open('post',`/mark-check/?id=${targetElem.id}`);
+    xhr.open('post',`/act/mark-check/?id=${targetElem.id}`);
     xhr.send();
     
     xhr.onload = function(){
