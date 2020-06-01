@@ -1,3 +1,5 @@
+
+/* general */
 html{
     border:0px;
     margin:0px;
@@ -24,17 +26,7 @@ a{
 *{
     transition: 0.4s;
 }
-form{
-    height:20%;
-    text-align: center;
-    vertical-align: middle;
-}
-form div{
-    margin: 0px -25px;
-}
-#box>h1{
-    text-align: center;
-}
+
 .input{
     height:40%;
     width:40%;
@@ -48,6 +40,11 @@ form div{
 body{
     background-color: rgb(93,93,70);
 }
+.hover:hover{
+    font-size: 1.2rem;
+}
+
+/* main box */
 body>div{
     background-color: lightseagreen;
     box-shadow: 0px 0px 10px 1px black;
@@ -62,26 +59,31 @@ body>div{
     display:flex;
     flex-direction: column;
 }
-.wid90{
-    width:90%;
+
+/* heading */
+#box>h1{
+    text-align: center;
 }
-.wid70{
-    width:70%;
+
+/* input data */
+form{
+    height:20%;
+    text-align: center;
+    vertical-align: middle;
 }
-.wid50{
-    width:49%;
+form div{
+    margin: 0px -25px;
 }
-.wid20{
-    width:20%;
-}
-.wid30{
-    width:30%;
-}
+
+
+/* tasks styling  */
 #task-list{
     overflow: scroll;
     height: 50%;
     align-items: center;
 }
+
+/* tasks styling individually */
 #task-list li[mark=true]{
     background-color: lightgray;
     opacity:0.2;
@@ -99,9 +101,6 @@ body>div{
     padding: 5px;
     list-style: circle;
 }
-.hover:hover{
-    font-size: 1.2rem;
-}
 #task-list li:hover{
     background-color: lightgray !important;
 }
@@ -110,7 +109,6 @@ body>div{
     padding:2px;
     height:10%;
 }
-
 #category[cat="Work"]{
     background-color: lightgreen;
 }
@@ -133,14 +131,15 @@ body>div{
     align-items: center;
 }
 
+/* footer */
 #filters{
     height:7%;
 }
-
 #filters div{
     display: inline-block;
 }
 
+/* responsiveness */
 @media (max-width:800px){
     body>div{
         width:60%;
@@ -155,4 +154,21 @@ body>div{
     body>div{
         width:95%;
     }
+}
+
+/* general */
+.wid90{
+    width:90%;
+}
+.wid70{
+    width:70%;
+}
+.wid50{
+    width:49%;
+}
+.wid20{
+    width:20%;
+}
+.wid30{
+    width:30%;
 }

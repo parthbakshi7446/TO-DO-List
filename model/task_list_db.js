@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 //create connection between server and database
 const buildconnection = require('../config/mongoose');
 
+//create schema
 let todoschema = new mongoose.Schema({
     title:{
         type:String,
@@ -25,5 +26,5 @@ let todoschema = new mongoose.Schema({
     }
 });
 
-
+// create collection
 module.exports.Task = mongoose.model('Task',todoschema);

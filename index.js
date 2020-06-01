@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
+const port = 8000;
 
+// const data = require('./routes/data');
 const db = require('./model/task_list_db');
 
 app.set('view engine','ejs');
@@ -8,6 +10,8 @@ app.set('views','./views');
 app.use(express.urlencoded());
 app.use(express.static('assets'));
 
+
+// calculating total incomplete tasks beforehand
 let totalCount=0;
 db.Task.find({checked:false},function(err,data){
     if(err){
@@ -18,12 +22,14 @@ db.Task.find({checked:false},function(err,data){
     }
 });
 
-
-app.listen(8000,function(err){
+//creating server 
+app.listen(port,function(err){
     if(err){
         console.log("fuck fuck fuck");
     }
 });
+
+
 app.get('/',function(req,res,next){
     db.Task.find({},function(err,tasks){
         if(err){
@@ -50,6 +56,8 @@ app.post('/submit-task',function(req,res,next){
     totalCount++;
     res.redirect('back');
 });
+
+// app.use('/data',data);
 
 app.get('/data',function(req,res){
     db.Task.find({},function(err,data){
