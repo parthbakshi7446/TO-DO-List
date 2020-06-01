@@ -1,4 +1,4 @@
-git remote add origin https://github.com/parthbakshi7446/TO-DO-List.git
+A WebApp to keep track of all your day-to-day Tasks with additional features to ease the process.
 
 npm install
 to install all dependencies
